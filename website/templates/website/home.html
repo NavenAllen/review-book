@@ -20,6 +20,13 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="http://localhost/home.html">Review Book</a>
             </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://localhost">
+                        <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </a>
+                </li>
+            </ul>
             <form class="navbar-form navbar-right" action="{% url 'search' %}" method="get">
                 <input type="text" placeholder="Search.." class="form-control" name="search_query">
                 <button class="btn btn-default" type="submit">
