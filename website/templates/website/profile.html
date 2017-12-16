@@ -71,5 +71,13 @@
             </div>
         </div>
 
+        {% if user_reviews %}
+        {% for review in user_reviews %}         
+            <div class="container"><input size="10" readonly value="{{ review.title }}"><br><textarea  cols="50" rows="10" style="resize: none;" readOnly>{{ review.text }}</textarea><br><p>{{ review.upvotes }}</p><p>{{ review.downvotes }}</p></div>
+        {% endfor %}
+        {% else %}
+            <p>No reviews available</p>
+        {% endif %}
+
 </body>
 </html>
