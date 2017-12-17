@@ -13,6 +13,15 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+<style>
+    .GroupReviews{
+        border: 1px solid;
+        border-color: #eeeeee;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #eeeeee;
+    }
+</style>
 <body>
         <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
@@ -21,8 +30,13 @@
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#group-join-modal" title="join group">
-                                        <span class="glyphicon glyphicon-edit"></span>
+                                    <a href="#" data-toggle="modal" data-target="#group-review-modal" title="Review this group">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                    </a>
+                                </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#group-join-modal" title="Join group">
+                                        Join group
                                 </a>
                             </li>
                             <li>
@@ -42,15 +56,23 @@
                     <li class="list-group-item">Group Members</li>
             </ul> 
             <!-- Group members -->
-            <!-- For reviews -->
-            <div class="container">
-                <input size="10" readonly value="{{ review.title }}"><br>
-                <textarea  cols="50" rows="10" style="resize: none;" readOnly>
-                    {{ review.text }}
-                </textarea><br>
-                <p>{{ review.upvotes }}</p><p>{{ review.downvotes }}</p>
+            <div class="GroupReviews">
+                    
+                    <!-- For reviews -->
+                
+                <div class="container">
+                    <input size="10" readonly value="{{ review.title }}"><br>
+                    <textarea  cols="50" rows="10" style="resize: none;" readOnly>
+                        {{ review.text }}
+                    </textarea><br>
+                    <!-- <p>{{ review.upvotes }}</p><p>{{ review.downvotes }}</p> -->
+                    <button class=""><span class="glyphicon glyphicon-thumbs-up"></span> - {{ review.upvotes }}</button>
+                    <button class=""><span class="glyphicon glyphicon-thumbs-down"></span> - {{ review.downvotes }}</button>
+                </div>
+                
+                <!-- For reviews -->
+
             </div>
-            <!-- For reviews -->
         </div>
 
 </body>
