@@ -41,7 +41,20 @@
             </form>
         </div>
     </nav>
-
+    <div class='container'>
+    <div class="jumbotron">
+        <h1>Hey, {{user.name}}!</h1>
+        <h3>You are part of the following groups:</h3>
+        {% if group_list %}
+        <ul class="list-group">
+        {% for group in group_list %}
+        
+            <a class="list-group-item" href="{% url 'group' group.group_id %}">{{group.name}}</a>
+        {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    </div>
     <div class="modal fade" id="create-group-modal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -51,7 +64,7 @@
                             create new group
                         </h3>
                     </div>
-                    <form action="{% url 'createReview' %}" method="post">
+                    <form action="{% url 'createGroup' %}" method="post">
                         {% csrf_token %}
                         <div class="modal-body">
                             <div class="form-group">

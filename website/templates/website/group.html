@@ -26,21 +26,21 @@
         <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="http://localhost/home.html">Review Book</a>
+                        <a class="navbar-brand" href="{%url 'home' %}">Review Book</a>
                     </div>
                     <ul class="nav navbar-nav navbar-right">
                             <li>
-                                    <a href="#" data-toggle="modal" data-target="#group-review-modal" title="Review this group">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
-                                </li>
-                            <li>
-                                <a href="#" data-toggle="modal" data-target="#group-join-modal" title="Join group">
-                                        Join group
+                                <a href="{% url 'joinGroup' request.session.user_logged_id group_id %}" title="Join group">
+                                        Join group 
                                 </a>
                             </li>
                             <li>
-                                <a href="https://localhost">
+                                <a href="#" data-toggle="modal" data-target="#review-modal" title="join group">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'logout' %}">
                                     <span class="glyphicon glyphicon-log-out"></span> Log out
                                 </a>
                             </li>
@@ -49,29 +49,68 @@
         </nav>
         <div class="container">
             <div class="jumbotron">
-                <h1>Group Name</h1>
+                <h1>{{group.name}}</h1>
             </div>
             <!-- Group members -->
+            {% if members_list %}
             <ul class="list-group">
-                    <li class="list-group-item">Group Members</li>
+                {% for member in members_list %}
+                    <li class="list-group-item">{{ member.user.name }}</li>
+                {% endfor %}    
             </ul> 
+            {%endif%}
             <!-- Group members -->
             <div class="GroupReviews">
                     
                     <!-- For reviews -->
                 
+                {% if review_list %}
+                {% for group_review in review_list %}                
                 <div class="container">
-                    <input size="10" readonly value="{{ review.title }}"><br>
+                    <input size="10" readonly value="{{ group_review.review.title }}"><br>
                     <textarea  cols="50" rows="10" style="resize: none;" readOnly>
-                        {{ review.text }}
+                        {{ group_review.review.text }}
                     </textarea><br>
-                    <!-- <p>{{ review.upvotes }}</p><p>{{ review.downvotes }}</p> -->
-                    <button class=""><span class="glyphicon glyphicon-thumbs-up"></span> - {{ review.upvotes }}</button>
-                    <button class=""><span class="glyphicon glyphicon-thumbs-down"></span> - {{ review.downvotes }}</button>
+                    <a class='button' href="{% url 'incrementAgreed' group_review.group_review_id group_id %}"><span class="glyphicon glyphicon-thumbs-up"></span> - {{ group_review.agreed }}</a>
+                    <a class='button' href="{% url 'incrementDisagreed' group_review.group_review_id group_id %}"><span class="glyphicon glyphicon-thumbs-down"></span> - {{ group_review.disagreed }}</a>
                 </div>
-                
+                {% endfor %}
+                {% endif %}
                 <!-- For reviews -->
 
+            </div>
+        </div>
+
+        <div class="modal fade" id="review-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">
+                            Review
+                        </h3>
+                    </div>
+                    <form action="{% url 'createGroupReview' group_id %}" method="post">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="review-title">Title :</label><br>
+                                <input type="text" id="review-title" name="review_title" placeholder="review title">
+                            </div>
+                            <div class="form-group">
+                                <label for="review-text">Review :</label><br>
+                                <textarea type="text" id="review-text" cols="50" rows="10" style="resize: none;" name="review_text" placeholder="review content"></textarea>
+                            </div>
+                            <div class="form-group">
+                                    <label for="review-for">Title :</label><br>
+                                    <input type="text" id="review_for" name="review_for" placeholder="review for">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="post">
+                        </div>
+                    </form>    
+                </div>
             </div>
         </div>
 

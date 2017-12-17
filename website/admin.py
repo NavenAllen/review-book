@@ -2,9 +2,12 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import User, Review
+from .models import User, Review, GroupMembers, GroupReview
 
 # Register your models here.
 admin.site.register(User)
 admin.site.register(Review)
+admin.site.register(GroupMembers)
+admin.site.register(GroupReview)
+
 

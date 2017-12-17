@@ -27,7 +27,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="http://localhost/home.html">Review Book</a>
+                <a class="navbar-brand" href="{% url 'home' %}">Review Book</a>
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="https://localhost">
+                    <a href="{% url 'logout' %}">
                         <span class="glyphicon glyphicon-log-out"></span> Log out
                     </a>
                 </li>
@@ -65,7 +65,7 @@
                             create new group
                         </h3>
                     </div>
-                    <form action="{% url 'createReview' %}" method="post">
+                    <form action="{% url 'createGroup' %}" method="post">
                         {% csrf_token %}
                         <div class="modal-body">
                             <div class="form-group">
@@ -113,7 +113,7 @@
         </div>
             <div class="container">
                 <div class="jumbotron">
-                    <h1><!-- Profile Name --> Name</h1>
+                    <h1><!-- Profile Name --> {{user.name}}</h1>
                 </div>
             {% if user_reviews %}
             {% for review in user_reviews %}         
