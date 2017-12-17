@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Review Book</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css">
+    <!-- Bootstrap 3 -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+        <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="http://localhost/home.html">Review Book</a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#group-join-modal" title="join group">
+                                        <span class="glyphicon glyphicon-edit"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://localhost">
+                                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+        </nav>
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Group Name</h1>
+            </div>
+            <!-- Group members -->
+            <ul class="list-group">
+                    <li class="list-group-item">Group Members</li>
+            </ul> 
+            <!-- Group members -->
+            <!-- For reviews -->
+            <div class="container">
+                <input size="10" readonly value="{{ review.title }}"><br>
+                <textarea  cols="50" rows="10" style="resize: none;" readOnly>
+                    {{ review.text }}
+                </textarea><br>
+                <p>{{ review.upvotes }}</p><p>{{ review.downvotes }}</p>
+            </div>
+            <!-- For reviews -->
+        </div>
+
+</body>
+</html>

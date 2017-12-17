@@ -23,6 +23,11 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                    <a href="#" data-toggle="modal" data-target="#create-group-modal" title="create group">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </li>
+                <li>
                     <a href="{% url 'logout' %}">
                         <span class="glyphicon glyphicon-log-out"></span> Log out
                     </a>
@@ -36,6 +41,31 @@
             </form>
         </div>
     </nav>
+
+    <div class="modal fade" id="create-group-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">
+                            create new group
+                        </h3>
+                    </div>
+                    <form action="{% url 'createReview' %}" method="post">
+                        {% csrf_token %}
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="group-name">Group Name :</label><br>
+                                <input type="text" id="group-name" name="group_name" placeholder="group name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-primary" value="post">
+                        </div>
+                    </form>    
+                </div>
+            </div>
+        </div>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
