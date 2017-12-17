@@ -48,7 +48,11 @@ def search(request):
         return HttpResponseRedirect(reverse('profile'))
 
 def create_review(request):
-    new_review = Review(text=request.POST['review_text'], title=request.POST['review_title'])
+    user_visited_id = request.session['user_visited_id']
+    user_visited = User.objects.get(pk=user_visited_id)
+    user_logged_id = request.session['user_logged_id']
+    user_logged = User.objects.get(pk=user_logged_id)
+    new_review = Review(text=request.POST['review_text'], title=request.POST['review_title'], review_for=user_visited, review_by=user_logged)
     new_review.save()
     return HttpResponseRedirect(reverse('profile'))
 
@@ -56,7 +60,6 @@ def profile(request):
     user_visited_id = request.session['user_visited_id']
     user_visited = User.objects.get(pk=user_visited_id)
     user_reviews = Review.objects.filter(review_for=user_visited._id)
-    print (user_reviews)
     template = loader.get_template('website/profile.html')
     context = {
             'user': user_visited,
@@ -65,9 +68,13 @@ def profile(request):
     return HttpResponse(template.render(context, request))
 
 def logout(request):
-    for key in request.session.keys():
+    for key in list(request.session.keys()):
         del request.session[key]
     return HttpResponseRedirect(reverse('index'))
+
+def createGroup(request):
+    
+
 
 
 

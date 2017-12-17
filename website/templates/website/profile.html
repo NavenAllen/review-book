@@ -52,7 +52,8 @@
                             Review
                         </h3>
                     </div>
-                    <form action="#" method="post">
+                    <form action="{% url 'createReview' %}" method="post">
+                        {% csrf_token %}
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="review-title">Title :</label><br>

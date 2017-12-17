@@ -24,7 +24,7 @@ class Review(models.Model):
     class Meta:
         db_table = 'reviews'
 
-class Gmembers:
+class Group:
     _id = models.AutoField(primary_key=True)
     members = models.ForeignKey(User, on_delete=models.CASCADE, related_name="group_members")
     
